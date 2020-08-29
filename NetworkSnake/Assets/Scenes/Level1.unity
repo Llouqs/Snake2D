@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644d264d769d48e43a46e75eaf2af8de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellCount: 4
+  cellCount: 20
   sizeSideGrid: 190
   firstCellImage: {fileID: 7805001304053542080, guid: 937e92a57c7cff84bbec67a5d6104e7b,
     type: 3}
@@ -241,7 +241,9 @@ MonoBehaviour:
     type: 3}
   gameGrid: {fileID: 0}
   gridMaker: {fileID: 0}
-  player1: {fileID: 1166391370635785838, guid: 832f27a2415164f48a0e27ba37d3d83a, type: 3}
+  player1: {fileID: 7668317980125465607, guid: 0c867904558e1d74985485668f883ece, type: 3}
+  appleSprite: {fileID: 21300000, guid: d7d345dfae30df645a58c1bd6b9b9a0f, type: 3}
+  apple: {fileID: 0}
 --- !u!4 &1246974141
 Transform:
   m_ObjectHideFlags: 0

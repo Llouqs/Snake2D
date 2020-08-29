@@ -11,8 +11,18 @@ public class GameManager : MonoBehaviour
     public GameObject gameGrid;
     public GridMaker gridMaker;
     public GameObject player1;
-    public 
+    public Sprite appleSprite;
+    public GameObject apple;
+    
     void Start()
+    {
+        CreateGrid();
+        player1 = Instantiate(player1, gridMaker.grid[cellCount / 2, cellCount / 2].transform.position + new Vector3(0,0,1), Quaternion.identity);
+        player1.GetComponent<Snake>().SetHead(gridMaker.cellSize/25);
+        player1.transform.parent = transform;
+        CreateApple();
+    }
+    void CreateGrid()
     {
         gameGrid = new GameObject("GameGrid");
         gameGrid.transform.parent = transform;
@@ -23,12 +33,25 @@ public class GameManager : MonoBehaviour
         gridMaker.firstCellImage = firstCellImage;
         gridMaker.secondCellImage = secondCellImage;
         gridMaker.SetGrid();
-        player1.GetComponent<Snake>().SetSize(gridMaker.cellSize/25);
-        player1 = Instantiate(player1, gridMaker.grid[cellCount / 2, cellCount / 2].transform.position + new Vector3(0,0,1), Quaternion.identity);
-        player1.transform.parent = transform;
-        
+    }
+    
+    void CreateApple()
+    {
+        apple = new GameObject("Apple");
+        var appleRenderer = apple.AddComponent<SpriteRenderer>();
+        appleRenderer.sprite = appleSprite;
+        appleRenderer.sortingOrder = 1;
+        apple.transform.localScale = new Vector3(gridMaker.cellSize/25, gridMaker.cellSize/25, 1);
+        apple.transform.parent = transform;
+        PlaceApple();
     }
 
+    void PlaceApple()
+    {
+        var randomPosX = Random.Range(0, cellCount);
+        var randomPosY = Random.Range(0, cellCount);
+        apple.transform.position = gridMaker.grid[randomPosX, randomPosY].nodePosition;
+    }
     void Update()
     {
         

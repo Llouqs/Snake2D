@@ -5,35 +5,35 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
-    public Sprite head;
-    public Sprite bend;
-    public Sprite body;
-    public Sprite tail;
-    public List<Sprite> allBody;
+    public Sprite headSprite;
+    public Sprite bendSprite;
+    public Sprite bodySprite;
+    public Sprite tailSprite;
     public float sizeSnake;
     private bool up, left, right, down;
     private Direction currentDirection;
-    private float _frameRateTime = 0.9f;
+    private float _frameRateTime = 0.7f;
     private float _previousTime;
+    public GameObject head;
+    public List<GameObject> allBody;
 
     public enum Direction
     {
         up, left, right, down
     }
-    
-    void Start()
-    {
-        allBody.Add(head);
-        allBody.Add(body);
-        allBody.Add(tail);
-    }
 
-    public void SetSize(float size)
+    public void SetHead(float size)
     {
         sizeSnake = size;
-        transform.localScale = new Vector3(sizeSnake, sizeSnake, 1);
+        head = new GameObject("SnakeHead");
+        var headRenderer = head.AddComponent<SpriteRenderer>();
+        headRenderer.sprite = headSprite;
+        headRenderer.sortingOrder = 2;
+        head.transform.localScale = new Vector3(sizeSnake, sizeSnake, 1);
+        allBody.Add(head);
+        head.transform.position = transform.position;
+        head.transform.parent = transform;      
     }
-    // Update is called once per frame
     void Update()
     {
         GetInput();
@@ -58,46 +58,50 @@ public class Snake : MonoBehaviour
 
     void SetPlayerDirection()
     {
-        if (up)
+        if (up && currentDirection!=Direction.down)
         {
             currentDirection = Direction.up;
         }
-        else if(left)
+        else if(left && currentDirection!=Direction.right)
         {
             currentDirection = Direction.left;
         }
-        else if(right)
+        else if(right && currentDirection!=Direction.left)
         {
             currentDirection = Direction.right;
         }
-        else if(down)
+        else if(down && currentDirection!=Direction.up)
         {
             currentDirection = Direction.down;
         }
     }
-
+    
     void MovePlayer()
     {
         switch (currentDirection)
         {
             case Direction.up:
                 transform.position += new Vector3(0, sizeSnake, 0);
+                head.transform.localRotation = Quaternion.Euler(0,0,90);
                 break;
             case Direction.left:
                 transform.position -= new Vector3(sizeSnake, 0, 0);
+                head.transform.localRotation = Quaternion.Euler(0,0,180);
                 break;
             case Direction.right:
                 transform.position += new Vector3(sizeSnake, 0, 0);
+                head.transform.localRotation = Quaternion.Euler(0,0,0);
                 break;
             case Direction.down:
                 transform.position -= new Vector3(0, sizeSnake, 0);
+                head.transform.localRotation = Quaternion.Euler(0,0,-90);
                 break;
             default:
                 break;
         }
     }
     void GetInput()
-    {
+    { 
         up = Input.GetKeyDown(KeyCode.UpArrow);
         left = Input.GetKeyDown(KeyCode.LeftArrow);
         right = Input.GetKeyDown(KeyCode.RightArrow);

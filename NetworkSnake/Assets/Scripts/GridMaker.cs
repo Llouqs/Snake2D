@@ -42,12 +42,11 @@ public class GridMaker : MonoBehaviour
                     cell = Instantiate(secondCellImage, tmpVector, Quaternion.identity);
                     flag = true;
                 }
-
-                var n = cell.AddComponent<GridNode>();
-                n.nodePosition = tmpPosition;
-                grid[i, j] = n;
                 cell.transform.parent = transform;
                 cell.name = "( Cell: " + i + ", " + j + " )";
+                var n = cell.AddComponent<GridNode>();
+                n.nodePosition = tmpVector;
+                grid[i, j] = n;
             }
             if (cellCount % 2 == 0)
                 flag = !flag;
