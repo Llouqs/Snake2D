@@ -8,64 +8,47 @@ public class Snake : MonoBehaviour
 {
     public float sizeSnake;
     private bool up, left, right, down;
-    private Direction currentDirection;
+    private Direction _inputDirection;
+    private Direction _currentDirection;
     public Transform snakeHead;
     public Transform snakeTail;
     public List<Transform> snakeCircles = new List<Transform>();
     public List<Vector2> positions = new List<Vector2>();
-    //private Rigidbody2D componentRigidbody;
     public float speed;
-    private readonly float _frameRateTime = 0.5f;
+    private const float FrameRateTime = 0.15f;
     private float _previousTime;
 
-    public enum Direction
+    private enum Direction
     {
-        up, left, right, down
+        Up, Left, Right, Down
     }
     public void AddCircle()
     {
         var circle = Instantiate(snakeTail, positions[positions.Count - 1], Quaternion.identity, transform);
         snakeCircles.Add(circle);
         positions.Add(circle.position);
+        circle.name = "SnakeTail " + snakeCircles.Count;
     }
     public void SetHead(float size)
     {
-        //componentRigidbody = GetComponent<Rigidbody2D>();
         sizeSnake = size;
-        snakeHead = Instantiate(snakeHead, transform.position, Quaternion.identity, transform);
         snakeHead.localScale = new Vector3(sizeSnake, sizeSnake, 1);
+        snakeHead = Instantiate(snakeHead, transform.position, Quaternion.identity, transform);
+        snakeHead.name = "SnakeHead 1";
         snakeCircles.Add(snakeHead);
         positions.Add(snakeHead.position);
-        
-        snakeTail = Instantiate(snakeTail, transform.position, Quaternion.identity, transform);
         snakeTail.localScale = new Vector3(sizeSnake, sizeSnake, 1);
-        snakeCircles.Add(snakeTail);
-        positions.Add(snakeTail.position);
-        
-        AddCircle();
-        AddCircle();
-        AddCircle();
         AddCircle();
         AddCircle();
     }
-    void Update()
+
+    private void Update()
     {
-        // var distance = ((Vector2) snakeHead.position - positions[0]).magnitude;
-        // if (distance > sizeSnake)
-        // {
-        //     var direction = ((Vector2) snakeHead.position - positions[0]).normalized;
-        //     positions.Insert(0, positions[0] + direction * sizeSnake);
-        //     positions.RemoveAt(positions.Count-1);
-        //     distance -= sizeSnake;
-        // }
-
-
         GetInput();
         SetPlayerDirection();
-        if (Time.time - _previousTime > _frameRateTime)
+        if (Time.time - _previousTime > FrameRateTime)
         {
             var previousPosition = positions[0];
-            SetPlayerDirection();
             MovePlayer();
             snakeCircles[0].position = positions[0];
             _previousTime = Time.time;
@@ -76,89 +59,63 @@ public class Snake : MonoBehaviour
                 previousPosition = tmp;
                 snakeCircles[i].position = positions[i];
             }
-
         }
     }
 
-
-    private bool IsGameOver()
+    private void SetPlayerDirection()
     {
-        throw new NotImplementedException();
+        if (up)
+        {
+            _inputDirection = Direction.Up;
+        }
+        else if(left)
+        {
+            _inputDirection = Direction.Left;
+        }
+        else if(right)
+        {
+            _inputDirection = Direction.Right;
+        }
+        else if(down)
+        {
+            _inputDirection = Direction.Down;
+        }
     }
 
-    void SetPlayerDirection()
+    private void MovePlayer()
     {
-        if (up && currentDirection!=Direction.down)
+        switch (_inputDirection)
         {
-            currentDirection = Direction.up;
-        }
-        else if(left && currentDirection!=Direction.right)
-        {
-            currentDirection = Direction.left;
-        }
-        else if(right && currentDirection!=Direction.left)
-        {
-            currentDirection = Direction.right;
-        }
-        else if(down && currentDirection!=Direction.up)
-        {
-            currentDirection = Direction.down;
-        }
-    }
-    
-    void MovePlayer()
-    {
-        switch (currentDirection)
-        {
-            /*case Direction.up:
-                componentRigidbody.velocity = new Vector3(0, sizeSnake, 0)*speed;
-                break;
-            case Direction.left:
-                componentRigidbody.velocity = new Vector3(-sizeSnake, 0, 0)*speed;
-                break;
-            case Direction.right:
-                componentRigidbody.velocity = new Vector3(sizeSnake, 0, 0)*speed;
-                break;
-            case Direction.down:
-                componentRigidbody.velocity = new Vector3(0, -sizeSnake, 0)*speed;
-                break;
-            default:
-                break;
-            case Direction.up:
-                snakeHead.position += new Vector3(0, sizeSnake, 0);
-                break;
-            case Direction.left:
-                snakeHead.position -= new Vector3(sizeSnake, 0, 0);
-                break;
-            case Direction.right:
-                snakeHead.position += new Vector3(sizeSnake, 0, 0);
-                break;
-            case Direction.down:
-                snakeHead.position -= new Vector3(0, sizeSnake, 0);
-                break;
-            default:
-                break;*/
-            case Direction.up:
+            case Direction.Up:
                 positions[0] += new Vector2(0, sizeSnake);
+                _currentDirection = Direction.Up;
                 break;
-            case Direction.left:
+            case Direction.Left:
                 positions[0] -= new Vector2(sizeSnake, 0);
+                _currentDirection = Direction.Left;
                 break;
-            case Direction.right:
+            case Direction.Right:
                 positions[0] += new Vector2(sizeSnake, 0);
+                _currentDirection = Direction.Right;
                 break;
-            case Direction.down:
+            case Direction.Down:
                 positions[0] -= new Vector2(0, sizeSnake);
+                _currentDirection = Direction.Down;
                 break;
             default:
                 break;
         }
     }
-    void GetInput()
+
+    private void GetInput()
     { 
-        up = Input.GetKeyDown(KeyCode.UpArrow);
-        left = Input.GetKeyDown(KeyCode.LeftArrow);
-        right = Input.GetKeyDown(KeyCode.RightArrow);
-        down = Input.GetKeyDown(KeyCode.DownArrow);
+        if(_currentDirection!=Direction.Down)
+            up = Input.GetKeyDown(KeyCode.UpArrow);
+        if(_currentDirection!=Direction.Right)
+            left = Input.GetKeyDown(KeyCode.LeftArrow);
+        if(_currentDirection!=Direction.Left)
+            right = Input.GetKeyDown(KeyCode.RightArrow);
+        if(_currentDirection!=Direction.Up)
+            down = Input.GetKeyDown(KeyCode.DownArrow);
     }
 }

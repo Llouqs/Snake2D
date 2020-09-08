@@ -15,16 +15,18 @@ public class GameManager : MonoBehaviour
     public GameObject player1;
     public Sprite appleSprite;
     public GameObject apple;
-    
-    void Start()
+
+    private void Start()
     {
         CreateGrid();
         player1 = Instantiate(player1, gridMaker.grid[cellCount / 2, cellCount / 2].transform.position + new Vector3(0,0,1), Quaternion.identity);
         player1.GetComponent<Snake>().SetHead(gridMaker.cellSize/25);
         player1.transform.parent = transform;
+        player1.name = "Player 1";
         CreateApple();
     }
-    void CreateGrid()
+
+    private void CreateGrid()
     {
         gameGrid = new GameObject("GameGrid");
         gameGrid.transform.parent = transform;
@@ -36,8 +38,8 @@ public class GameManager : MonoBehaviour
         gridMaker.secondCellImage = secondCellImage;
         gridMaker.SetGrid();
     }
-    
-    void CreateApple()
+
+    private void CreateApple()
     {
         apple = new GameObject("Apple");
         var appleRenderer = apple.AddComponent<SpriteRenderer>();
@@ -48,14 +50,10 @@ public class GameManager : MonoBehaviour
         PlaceApple();
     }
 
-    void PlaceApple()
+    private void PlaceApple()
     {
         var randomPosX = Random.Range(0, cellCount);
         var randomPosY = Random.Range(0, cellCount);
         apple.transform.position = gridMaker.grid[randomPosX, randomPosY].nodePosition;
-    }
-    void Update()
-    {
-        
     }
 }

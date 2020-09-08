@@ -33,7 +33,6 @@ public class GridMaker : MonoBehaviour
                 var tmpVector = tmpPosition + firstCellPosition + new Vector2(firstCellPosition.x * 2 * j, firstCellPosition.y * 2 * i);
                 if (flag)
                 {
-                    
                     cell = Instantiate(firstCellImage, tmpVector, Quaternion.identity);
                     flag = false;
                 }

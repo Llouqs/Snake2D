@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 99
+  controlID: 118
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -607,23 +607,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: fc330000
-      m_LastClickedID: 13308
-      m_ExpandedIDs: 4efcfeff9609ffff2e27ffff5e70ffff0082ffff70a9ffff4cc5ffff0ed3ffff18e1ffff6cfbfffffc330000
+      m_SelectedIDs: ba370000
+      m_LastClickedID: 0
+      m_ExpandedIDs: ec8affff8cc2ffffe0c8ffffdaccffffd0d0ffff96d8ffff38ddffff1ee2ffff6cfbfffffc330000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: SnakeHead
-        m_OriginalName: SnakeHead
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 14632
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 12}
       m_SearchString: 
@@ -672,19 +672,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sprites
+    - Assets/Prefabs
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Sprites
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\\u0412\u043E\u043B\u044C\u0434\u0435\u043C\u0430\u0440\\Desktop\\Snake2D\\NetworkSnake"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 74340000
-    m_LastClickedID: 13428
+    m_SelectedIDs: 6e340000
+    m_LastClickedID: 13422
     m_ExpandedIDs: 000000006834000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -765,7 +765,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 540}
+    m_ScrollPosition: {x: 0, y: 16}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 110
