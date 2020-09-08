@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644d264d769d48e43a46e75eaf2af8de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellCount: 20
+  cellCount: 10
   sizeSideGrid: 190
   firstCellImage: {fileID: 7805001304053542080, guid: 937e92a57c7cff84bbec67a5d6104e7b,
     type: 3}

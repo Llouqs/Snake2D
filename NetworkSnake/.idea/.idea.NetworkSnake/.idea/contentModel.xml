@@ -10,8 +10,8 @@
           <e p="GameManager.cs" t="Include" />
           <e p="GridMaker.cs" t="Include" />
           <e p="GridNode.cs" t="Include" />
+          <e p="Snake.cs" t="Include" />
         </e>
-        <e p="Snake.cs" t="Include" />
       </e>
       <e p="NetworkSnake.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
