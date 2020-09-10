@@ -242,6 +242,8 @@ MonoBehaviour:
   gameGrid: {fileID: 0}
   gridMaker: {fileID: 0}
   player1: {fileID: 7668317980125465607, guid: 0c867904558e1d74985485668f883ece, type: 3}
+  snake1: {fileID: 0}
+  applePosition: {x: 0, y: 0}
   appleSprite: {fileID: 21300000, guid: d7d345dfae30df645a58c1bd6b9b9a0f, type: 3}
   apple: {fileID: 0}
 --- !u!4 &1246974141
