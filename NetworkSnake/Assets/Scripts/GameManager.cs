@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        cellCount = Convert.ToInt32(PlayerPrefs.GetString("gridSize"));
         CreateGrid();
         player1 = Instantiate(player1, gridMaker.grid[cellCount / 2, cellCount / 2].transform.position + new Vector3(0,0,1), Quaternion.identity);
         snake1 = player1.GetComponent<Snake>();
