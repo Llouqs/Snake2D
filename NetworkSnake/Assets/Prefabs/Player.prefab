@@ -46,7 +46,7 @@ MonoBehaviour:
   sizeSnake: 9.5
   snakeHead: {fileID: 1928225928962839572, guid: b4261a5e7c56d2f468ae30e0f37a9eaf,
     type: 3}
-  snakeTail: {fileID: 2553977349273514097, guid: 707e7e020c83c8f4ebf50a2b16fe8a61,
+  snakeTail: {fileID: 1928225928962839572, guid: b4261a5e7c56d2f468ae30e0f37a9eaf,
     type: 3}
   snakeCircles: []
   positions: []

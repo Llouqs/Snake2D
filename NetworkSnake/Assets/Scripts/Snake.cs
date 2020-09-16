@@ -44,7 +44,7 @@ public class Snake : MonoBehaviour
         snakeCircles.Add(snakeHead);
         positions.Add(snakeHead.position);
         snakeTail.localScale = new Vector3(sizeSnake, sizeSnake, 1);
-        _inputDirection = Direction.Left;
+        _inputDirection = Direction.Right;
         AddCircle();
         AddCircle();
     }

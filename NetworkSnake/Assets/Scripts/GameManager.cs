@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,25 +13,40 @@ public class GameManager : MonoBehaviour
     public GameObject secondCellImage;
     public GameObject gameGrid;
     public GridMaker gridMaker;
-    public GameObject player1;
-    public Snake snake1;
+    public GameObject playerPref;
     public Vector2 applePosition;
     public Sprite appleSprite;
     public GameObject apple;
+    public List<GameObject> players;
+    public List<Snake> snakes;
+    public List<Transform> colors;
+    public int maxPlayers;
 
     private void Start()
     {
         cellCount = Convert.ToInt32(PlayerPrefs.GetString("gridSize"));
         CreateGrid();
-        player1 = Instantiate(player1, gridMaker.grid[cellCount / 2, cellCount / 2].transform.position + new Vector3(0,0,1), Quaternion.identity);
-        snake1 = player1.GetComponent<Snake>();
-        snake1.SetHead(gridMaker.cellSize/25);
-        snake1.SetGridBorders(sizeSideGrid);
-        player1.transform.parent = transform;
-        player1.name = "Player 1";
+        maxPlayers = Convert.ToInt32(PlayerPrefs.GetString("maxPlayersNumber"));
+        for (var i = 0; i < maxPlayers; i++)
+        {
+            CreatePlayer();
+        }
         CreateApple();
     }
 
+    private void CreatePlayer()
+    {
+        var i = players.Count;
+        players.Add(Instantiate(playerPref, gridMaker.grid[(int)(i*(cellCount/4) + 2), (int)cellCount / 2].transform.position + new Vector3(0,0,1), Quaternion.identity));
+        snakes.Add(players[i].GetComponent<Snake>());
+        snakes[i].snakeHead = colors[i * 2];
+        snakes[i].snakeTail = colors[i * 2 + 1];
+        snakes[i].SetHead(gridMaker.cellSize/25);
+        snakes[i].SetGridBorders(sizeSideGrid);
+        players[i].transform.parent = transform;
+        players[i].name = "Player" + (i + 1);
+    }
+    
     private void CreateGrid()
     {
         gameGrid = new GameObject("GameGrid");
@@ -65,15 +81,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (((int)snake1.positions[0].x) == (int)applePosition.x && ((int)snake1.positions[0].y) == (int)applePosition.y)
+        foreach (var snake in snakes.Where(snake => ((int) snake.positions[0].x) == (int) applePosition.x &&
+                                                    ((int) snake.positions[0].y) == (int) applePosition.y))
         {
-            snake1.AddCircle();
+            snake.AddCircle();
             PlaceApple();
         }
-        /*foreach (var tmp in snake1.positions)
-        {
-            
-        }
-        */
     }
 }

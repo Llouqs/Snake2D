@@ -460,11 +460,22 @@ MonoBehaviour:
     type: 3}
   gameGrid: {fileID: 0}
   gridMaker: {fileID: 0}
-  player1: {fileID: 7668317980125465607, guid: 0c867904558e1d74985485668f883ece, type: 3}
-  snake1: {fileID: 0}
+  playerPref: {fileID: 7668317980125465607, guid: 0c867904558e1d74985485668f883ece,
+    type: 3}
   applePosition: {x: 0, y: 0}
   appleSprite: {fileID: 21300000, guid: d7d345dfae30df645a58c1bd6b9b9a0f, type: 3}
   apple: {fileID: 0}
+  players: []
+  snakes: []
+  colors:
+  - {fileID: 8989878797118771534, guid: 7b8c30fe791610b49984c7804bf68ffe, type: 3}
+  - {fileID: 3278352620551401694, guid: 7444fc36ee9d40d4e860dc0c18de8ea1, type: 3}
+  - {fileID: 2677986545252734158, guid: 568eed5d57e5af34ba2f8b708678cadc, type: 3}
+  - {fileID: 2304626581071805511, guid: 016a2c2e2737acf4ea027cfac38f2d0d, type: 3}
+  - {fileID: 4918358514860819811, guid: 8fb7debadf6013e419fb9bfaf076d333, type: 3}
+  - {fileID: 7345915882605664716, guid: ef2891eae360c1e47b256691496fe632, type: 3}
+  - {fileID: 2812767239421015958, guid: 2bfe0ad968cbb0d48a925bf7b45769ee, type: 3}
+  - {fileID: 8918899363992809668, guid: 97e67a13de45b244082b5a2979dad684, type: 3}
 --- !u!4 &1246974141
 Transform:
   m_ObjectHideFlags: 0
