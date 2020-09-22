@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,7 +38,8 @@ public class GameManager : MonoBehaviour
     private void CreatePlayer()
     {
         var i = players.Count;
-        players.Add(Instantiate(playerPref, gridMaker.grid[(int)(i*(cellCount/4) + 2), (int)cellCount / 2].transform.position + new Vector3(0,0,1), Quaternion.identity));
+        var playerTransform = PhotonNetwork.Instantiate(playerPref.name, gridMaker.grid[(int)(i*(cellCount/4) + 2), (int)cellCount / 2].transform.position + new Vector3(0,0,1), Quaternion.identity);
+        players.Add(playerTransform.gameObject);
         snakes.Add(players[i].GetComponent<Snake>());
         snakes[i].snakeHead = colors[i * 2];
         snakes[i].snakeTail = colors[i * 2 + 1];

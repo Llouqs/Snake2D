@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -18,6 +19,7 @@ public class Snake : MonoBehaviour
     private const float FrameRateTime = 0.25f;
     private float _previousTime;
     private float _gridBorder;
+    private PhotonView photonView;
  
     private enum Direction
     {
@@ -25,7 +27,7 @@ public class Snake : MonoBehaviour
     }
     public void AddCircle()
     {
-        var circle = Instantiate(snakeTail, positions[positions.Count - 1], Quaternion.identity, transform);
+        var circle = PhotonNetwork.Instantiate(snakeTail.name, positions[positions.Count - 1], Quaternion.identity);
         snakeCircles.Add(circle);
         positions.Add(circle.position);
         circle.name = "SnakeTail " + snakeCircles.Count;
@@ -37,9 +39,10 @@ public class Snake : MonoBehaviour
     }
     public void SetHead(float size)
     {
+        photonView = GetComponent<PhotonView>();
         sizeSnake = size;
         snakeHead.localScale = new Vector3(sizeSnake, sizeSnake, 1);
-        snakeHead = Instantiate(snakeHead, transform.position, Quaternion.identity, transform);
+        snakeHead = PhotonNetwork.Instantiate(snakeHead.name, transform.position, Quaternion.identity);
         snakeHead.name = "SnakeHead 1";
         snakeCircles.Add(snakeHead);
         positions.Add(snakeHead.position);
@@ -141,6 +144,7 @@ public class Snake : MonoBehaviour
     }
     
     private void Rotation() {
+        if (!photonView.IsMine) return;
         switch (_inputDirection) {
                 case Direction.Left:
                 case Direction.Right:
